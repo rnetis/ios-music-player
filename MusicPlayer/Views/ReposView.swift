@@ -45,7 +45,7 @@ struct ReposView: View {
                                     .lineLimit(1)
                             }
                             Spacer()
-                            if let error = status.error {
+                            if status.error != nil {
                                 Image(systemName: "exclamationmark.triangle")
                                     .foregroundColor(.red)
                             } else {
