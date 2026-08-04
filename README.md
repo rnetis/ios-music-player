@@ -137,7 +137,7 @@ scripts/make_icon.py               # regenerates AppIcon.png (stdlib only)
 
 - **Bundle ID** defaults to `com.example.musicplayer` — change it in `project.yml` if you plan to keep a stable identity across installs.
 - **ATS**: `NSAllowsArbitraryLoads` is enabled because repos/music are often served over plain http. Tighten it in `Info.plist` if you only use https.
-- **VLCKit** is a large binary (~150 MB); the first build fetches it from `code.videolan.org` and takes a few minutes. It's pinned via SPM to the `main` branch (VLCKit 4.0-dev, checksum-pinned binary) — no released 3.x tag ships a root `Package.swift`.
+- **VLCKit** is a large binary (~150 MB); the first build fetches it from `code.videolan.org` and takes a few minutes. It's pinned via SPM to the default branch `master` (VLCKit 4.0-dev, checksum-pinned binary) — no released 3.x tag ships a root `Package.swift`.
 - Deployment target is iOS 15.0+.
 
 ## License
