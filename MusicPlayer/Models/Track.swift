@@ -10,6 +10,8 @@ import Foundation
 /// `name` is accepted as an alias for `title`, `cover` for `artwork`.
 struct Track: Identifiable, Decodable, Hashable {
     let id = UUID()
+    /// When this track was decoded/added — used for "Date Added" sorting.
+    let addedAt = Date()
     var url: URL
     var title: String
     var artist: String

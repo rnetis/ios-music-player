@@ -35,7 +35,7 @@ struct LibraryView: View {
             case .artist:
                 return isAscending ? track1.artist < track2.artist : track1.artist > track2.artist
             case .dateAdded:
-                return isAscending ? track1.id < track2.id : track1.id > track2.id
+                return isAscending ? track1.addedAt < track2.addedAt : track1.addedAt > track2.addedAt
             }
         }
     }

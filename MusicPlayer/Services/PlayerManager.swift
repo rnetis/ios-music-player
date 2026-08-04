@@ -60,8 +60,8 @@ final class PlayerManager: ObservableObject {
         }
         
         let event = CHHapticEvent(eventType: .hapticTransient, parameters: [
-            CHHapticParameter(parameterID: .hapticIntensity, value: Float(intensity)),
-            CHHapticParameter(parameterID: .hapticSharpness, value: 0.5)
+            CHHapticEventParameter(parameterID: .hapticIntensity, value: Float(intensity)),
+            CHHapticEventParameter(parameterID: .hapticSharpness, value: 0.5)
         ], relativeTime: 0, duration: 0.15)
         
         do {

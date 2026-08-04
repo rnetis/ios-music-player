@@ -17,7 +17,7 @@ struct ReposView: View {
                             .autocorrectionDisabled()
                         Button("Add") { addRepo() }
                             .disabled(newRepoURL.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
-                            .fontWeight(.semibold)
+                            .font(.body.weight(.semibold))
                     }
                     if let errorMessage = errorMessage {
                         Text(errorMessage)
@@ -91,7 +91,7 @@ struct ReposView: View {
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Done") { dismiss() }
-                        .fontWeight(.semibold)
+                        .font(.body.weight(.semibold))
                 }
             }
             .hiddenScrollContentBackground()

@@ -133,13 +133,7 @@ struct PlayerView: View {
                     }
                 }
             )
-            .tint(
-                LinearGradient(
-                    colors: [Color.purple.opacity(0.8), Color.blue.opacity(0.9)],
-                    startPoint: .leading,
-                    endPoint: .trailing
-                )
-            )
+            .accentColor(.purple)
             .animation(.easeInOut(duration: 0.2), value: displayedTime)
             
             HStack {
@@ -147,9 +141,8 @@ struct PlayerView: View {
                 Spacer()
                 Text(player.duration > 0 ? formatTime(player.duration) : "--:--")
             }
-            .font(.caption2.monospacedDigit())
+            .font(.caption2.monospacedDigit().weight(.medium))
             .foregroundColor(.white.opacity(0.5))
-            .fontWeight(.medium)
         }
     }
 
@@ -310,6 +303,7 @@ struct PlayerView: View {
         }
     }
 
+    @ViewBuilder
     private var volumeSection: some View {
         HStack(spacing: 14) {
             Image(systemName: "speaker.fill")
@@ -324,13 +318,7 @@ struct PlayerView: View {
                 ),
                 in: 0...1
             )
-            .tint(
-                LinearGradient(
-                    colors: [Color.purple.opacity(0.7), Color.blue.opacity(0.8)],
-                    startPoint: .leading,
-                    endPoint: .trailing
-                )
-            )
+            .accentColor(.purple)
             .frame(maxWidth: 140)
             
             Image(systemName: "speaker.wave.3.fill")
