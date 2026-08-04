@@ -3,6 +3,7 @@ import Combine
 import Foundation
 import MediaPlayer
 import UIKit
+import CoreHaptics
 
 /// Central playback state machine: owns the queue, the audio engine,
 /// remote-control / lock-screen integration and the background audio session.
@@ -24,10 +25,56 @@ final class PlayerManager: ObservableObject {
     @Published var shuffle = false
     @Published var repeatMode: RepeatMode = .off
     @Published var volume: Float = 0.8
-
+    @Published var isLoading = false
+    @Published var sleepTimerRemaining: TimeInterval?
+    @Published private(set) var isBuffering = false
+    
     var currentTrack: Track? {
         guard let index = currentIndex, queue.indices.contains(index) else { return nil }
         return queue[index]
+    }
+    
+    // MARK: - Haptic Engine
+    
+    private var hapticEngine: CHHapticEngine?
+    
+    private func setupHaptics() {
+        do {
+            hapticEngine = try CHHapticEngine()
+            try hapticEngine?.start()
+        } catch {
+            print("Haptic engine unavailable: \(error)")
+        }
+    }
+    
+    func triggerHaptic(_ pattern: HapticPattern = .mediumTap) {
+        guard let engine = hapticEngine else { return }
+        
+        let intensity: CGFloat
+        switch pattern {
+        case .lightTap: intensity = 0.3
+        case .mediumTap: intensity = 0.5
+        case .heavyTap: intensity = 0.8
+        case .success: intensity = 0.6
+        case .warning: intensity = 0.4
+        }
+        
+        let event = CHHapticEvent(eventType: .hapticTransient, parameters: [
+            CHHapticParameter(parameterID: .hapticIntensity, value: Float(intensity)),
+            CHHapticParameter(parameterID: .hapticSharpness, value: 0.5)
+        ], relativeTime: 0, duration: 0.15)
+        
+        do {
+            let pattern = try CHHapticPattern(events: [event], parameters: [])
+            let player = try engine.makePlayer(with: pattern)
+            try player.start(atTime: 0)
+        } catch {
+            print("Failed to play haptic: \(error)")
+        }
+    }
+    
+    enum HapticPattern {
+        case lightTap, mediumTap, heavyTap, success, warning
     }
 
     // MARK: - Private
@@ -35,12 +82,74 @@ final class PlayerManager: ObservableObject {
     private let engine: AudioEngine = AudioEngineFactory.make()
     private var timer: Timer?
     private var pendingAutoAdvance = false
+    private var sleepTimer: Timer?
 
     private init() {
         configureAudioSession()
         setupRemoteCommands()
         startTimer()
+        setupHaptics()
         engine.onEndReached = { [weak self] in self?.handleEndReached() }
+        observeEngineState()
+    }
+    
+    private func observeEngineState() {
+        // Observe loading/buffering states from engine
+        NotificationCenter.default.addObserver(
+            forName: NSNotification.Name("EngineDidStartLoading"),
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            self?.isLoading = true
+            self?.isBuffering = true
+        }
+        
+        NotificationCenter.default.addObserver(
+            forName: NSNotification.Name("EngineDidFinishLoading"),
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            self?.isLoading = false
+            self?.isBuffering = false
+        }
+    }
+    
+    // MARK: - Sleep Timer
+    
+    func startSleepTimer(minutes: Int) {
+        stopSleepTimer()
+        let seconds = TimeInterval(minutes * 60)
+        sleepTimerRemaining = seconds
+        
+        sleepTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
+            guard let self = self else {
+                timer.invalidate()
+                return
+            }
+            
+            if let remaining = self.sleepTimerRemaining, remaining > 1 {
+                self.sleepTimerRemaining = remaining - 1
+            } else {
+                timer.invalidate()
+                self.sleepTimerRemaining = nil
+                self.pause()
+                self.triggerHaptic(.success)
+            }
+        }
+    }
+    
+    func stopSleepTimer() {
+        sleepTimer?.invalidate()
+        sleepTimer = nil
+        sleepTimerRemaining = nil
+    }
+    
+    func toggleSleepTimer() {
+        if sleepTimerRemaining != nil {
+            stopSleepTimer()
+        } else {
+            startSleepTimer(minutes: 30)
+        }
     }
 
     // MARK: - Playback controls
@@ -49,10 +158,12 @@ final class PlayerManager: ObservableObject {
         guard !tracks.isEmpty else { return }
         queue = tracks
         currentIndex = min(max(index, 0), tracks.count - 1)
+        triggerHaptic(.mediumTap)
         startCurrent()
     }
 
     func togglePlayPause() {
+        triggerHaptic(.mediumTap)
         isPlaying ? pause() : resume()
     }
 
@@ -70,10 +181,12 @@ final class PlayerManager: ObservableObject {
     }
 
     func next() {
+        triggerHaptic(.lightTap)
         step(+1, userInitiated: true)
     }
 
     func previous() {
+        triggerHaptic(.lightTap)
         if currentTime > 3 {
             seek(to: 0)
             return
@@ -98,6 +211,7 @@ final class PlayerManager: ObservableObject {
     private func startCurrent() {
         guard let track = currentTrack else { return }
         pendingAutoAdvance = false
+        isLoading = true
         engine.load(url: track.url)
         engine.volume = volume
         engine.play()
