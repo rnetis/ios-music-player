@@ -2,7 +2,7 @@
 
 A sideloadable iOS music player that plays **every audio format** — Opus, FLAC, MP3, M4A/AAC, OGG, WAV, ALAC, WMA, AC3, DTS, … — from **multiple hosted JSON repos**: any JSON file hosted anywhere on the internet (GitHub raw, gist, any CDN) that lists tracks with their URL, title and artist.
 
-- 🎵 Universal playback via **VLCKit**, with an automatic **AVFoundation** fallback (mp3/m4a/aac/alac/flac/wav/aiff/caf)
+- 🎵 Universal playback: **hybrid engine** — AVFoundation handles the formats it decodes natively (mp3/m4a/aac/alac/flac/wav/aiff/caf/mp4, hardware-accelerated), **VLCKit** covers everything else (opus/ogg/wma/ac3/dts/…) — so every format plays and the common ones are bulletproof
 - 📚 Add **unlimited JSON repos** in-app; tracks are merged and deduplicated by URL
 - 🎧 Lock-screen controls, background audio, artwork, shuffle/repeat, seek, volume, search
 - 📦 A GitHub Action builds an **unsigned IPA** on every `v*` tag and attaches it to a Release — ready for AltStore / Sideloadly / ESign

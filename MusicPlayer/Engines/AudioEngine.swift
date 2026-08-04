@@ -17,11 +17,9 @@ protocol AudioEngine: AnyObject {
 }
 
 enum AudioEngineFactory {
+    /// Hybrid: AVFoundation for natively-supported formats (mp3, m4a/aac,
+    /// alac, flac, wav, aiff, caf, mp4), VLCKit for everything else.
     static func make() -> AudioEngine {
-        #if canImport(VLCKit)
-        return VLCEngine()
-        #else
-        return AVFoundationEngine()
-        #endif
+        HybridEngine()
     }
 }
