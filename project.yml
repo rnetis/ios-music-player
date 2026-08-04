@@ -7,7 +7,9 @@ options:
 packages:
   VLCKit:
     url: https://code.videolan.org/videolan/VLCKit.git
-    from: 3.6.0
+    # SPM manifests exist only on `main` (VLCKit 4.0-dev, checksum-pinned
+    # binary target) — no released 3.x tag has a root Package.swift.
+    branch: main
 settings:
   base:
     SWIFT_VERSION: "5.0"

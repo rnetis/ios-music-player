@@ -76,7 +76,7 @@ Select your signing team under **Signing & Capabilities**, then Run on a device 
 ## Building the unsigned IPA with GitHub Actions
 
 1. Push this repo to GitHub.
-2. *(Optional but recommended)* In `MusicPlayer/Services/RepoService.swift`, replace `YOUR-USERNAME` in `sampleRepoURL` with your GitHub account so the in-app "Add sample repo" button works.
+2. The in-app "Add sample repo" button already points at this repo's `sample-repo.json`. For your **own** repos, host the JSON anywhere and paste the URL in the app.
 3. Tag and push:
 
    ```bash
@@ -137,7 +137,7 @@ scripts/make_icon.py               # regenerates AppIcon.png (stdlib only)
 
 - **Bundle ID** defaults to `com.example.musicplayer` — change it in `project.yml` if you plan to keep a stable identity across installs.
 - **ATS**: `NSAllowsArbitraryLoads` is enabled because repos/music are often served over plain http. Tighten it in `Info.plist` if you only use https.
-- **VLCKit** is a large binary (~150 MB); the first build fetches it from `code.videolan.org` and takes a few minutes.
+- **VLCKit** is a large binary (~150 MB); the first build fetches it from `code.videolan.org` and takes a few minutes. It's pinned via SPM to the `main` branch (VLCKit 4.0-dev, checksum-pinned binary) — no released 3.x tag ships a root `Package.swift`.
 - Deployment target is iOS 15.0+.
 
 ## License

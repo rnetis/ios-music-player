@@ -33,9 +33,7 @@ final class RepoService {
 
     static let shared = RepoService()
 
-    /// Sample repo bundled with this project. After pushing to GitHub,
-    /// replace "YOUR-USERNAME" with your GitHub account, or just paste
-    /// your own raw URL in the app.
+    /// Sample repo bundled with this project — hosted at the repo's own raw URL.
     static let sampleRepoURL = URL(
         string: "https://raw.githubusercontent.com/rnetis/ios-music-player/main/sample-repo.json"
     )!
