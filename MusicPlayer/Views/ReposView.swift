@@ -11,7 +11,7 @@ struct ReposView: View {
             List {
                 Section {
                     HStack {
-                        TextField("https://example.com/music.json", text: $newRepoURL)
+                        TextField("http(s)://example.com/music.json", text: $newRepoURL)
                             .keyboardType(.URL)
                             .textInputAutocapitalization(.never)
                             .autocorrectionDisabled()
