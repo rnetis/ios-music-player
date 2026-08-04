@@ -100,7 +100,7 @@ struct PlayerView: View {
             }
             .padding(.horizontal, 28)
         }
-        .onChange(of: player.isPlaying) { _, newValue in
+        .onChange(of: player.isPlaying) { newValue in
             withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
                 artworkScale = newValue ? 1.0 : 0.95
             }

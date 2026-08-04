@@ -44,8 +44,7 @@ struct LibraryView: View {
         NavigationView {
             content
                 .navigationTitle("Library")
-                .toolbarBackground(.visible, for: .navigationBar)
-                .toolbarBackground(.ultraThinMaterial, for: .navigationBar)
+                .toolbarBackgroundCompat(visible: true)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
                         Button {
@@ -126,7 +125,7 @@ struct LibraryView: View {
                 }
             }
             .listStyle(.plain)
-            .scrollContentBackground(.hidden)
+            .hiddenScrollContentBackground()
             .background(
                 LinearGradient(
                     colors: [Color(red: 0.98, green: 0.97, blue: 0.99), Color(red: 0.95, green: 0.94, blue: 0.97)],

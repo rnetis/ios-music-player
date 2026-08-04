@@ -297,6 +297,15 @@ final class PlayerManager: ObservableObject {
 
     private func syncPlayingState() {
         let actual = engine.isPlaying
+        if actual {
+            // Loading is set in startCurrent(); nothing posts the
+            // EngineDidFinishLoading notification, so clear it whenever
+            // the engine actually reports playing.
+            if isLoading || isBuffering {
+                isLoading = false
+                isBuffering = false
+            }
+        }
         if isPlaying != actual {
             isPlaying = actual
             if actual { updateNowPlaying() }

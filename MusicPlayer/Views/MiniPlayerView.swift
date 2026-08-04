@@ -138,7 +138,7 @@ struct MiniPlayerView: View {
                     isHovering = hovering
                 }
             }
-            .onChange(of: player.isPlaying) { _, isPlaying in
+            .onChange(of: player.isPlaying) { isPlaying in
                 if isPlaying {
                     // Animate wave heights when playing starts
                     withAnimation(.easeInOut(duration: 0.5).repeatForever(autoreverses: true)) {

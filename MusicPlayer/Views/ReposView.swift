@@ -87,14 +87,14 @@ struct ReposView: View {
             }
             .navigationTitle("Music Repos")
             .navigationBarTitleDisplayMode(.inline)
-            .toolbarBackground(.ultraThinMaterial, for: .navigationBar)
+            .toolbarBackgroundCompat()
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Done") { dismiss() }
                         .fontWeight(.semibold)
                 }
             }
-            .scrollContentBackground(.hidden)
+            .hiddenScrollContentBackground()
             .background(
                 LinearGradient(
                     colors: [Color(red: 0.98, green: 0.97, blue: 0.99), Color(red: 0.95, green: 0.94, blue: 0.97)],
