@@ -1,15 +1,34 @@
-# XcodeGen regenerates the project — never commit it
-MusicPlayer.xcodeproj/
-
+```
 # Build artifacts
-build/
+*.o
+*.obj
+*.out
+
+# Dependencies
+Pods/
+Carthage/
+.build/
 DerivedData/
-*.ipa
-*.app
 
-# Xcode user state
-xcuserdata/
-*.xcuserstate
+# Logs
+*.log
 
-# macOS noise
+# Environment
+.env
+.env.local
+*.env.*
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.tmp
+
+# macOS
 .DS_Store
+*.DS_Store
+
+# Windows
+Thumbs.db
+```
