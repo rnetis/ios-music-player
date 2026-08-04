@@ -1,0 +1,15 @@
+# XcodeGen regenerates the project — never commit it
+MusicPlayer.xcodeproj/
+
+# Build artifacts
+build/
+DerivedData/
+*.ipa
+*.app
+
+# Xcode user state
+xcuserdata/
+*.xcuserstate
+
+# macOS noise
+.DS_Store

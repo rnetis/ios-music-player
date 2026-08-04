@@ -1,0 +1,14 @@
+[
+  {
+    "url": "https://filesamples.com/samples/audio/aac/sample1.aac",
+    "title": "AAC Sample",
+    "artist": "filesamples.com",
+    "duration": 30
+  },
+  {
+    "url": "https://filesamples.com/samples/audio/mp3/sample1.mp3",
+    "title": "MP3 Again (duplicate URL — deduped)",
+    "artist": "filesamples.com",
+    "artwork": "https://picsum.photos/300"
+  }
+]

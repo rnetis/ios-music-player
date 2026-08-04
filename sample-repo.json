@@ -1,0 +1,48 @@
+{
+  "name": "Sample Formats",
+  "description": "One track per audio format to test universal playback.",
+  "tracks": [
+    {
+      "url": "https://filesamples.com/samples/audio/mp3/sample1.mp3",
+      "title": "MP3 Sample",
+      "artist": "filesamples.com",
+      "album": "Format Test"
+    },
+    {
+      "url": "https://filesamples.com/samples/audio/flac/sample1.flac",
+      "title": "FLAC Sample",
+      "artist": "filesamples.com",
+      "album": "Format Test"
+    },
+    {
+      "url": "https://filesamples.com/samples/audio/m4a/sample1.m4a",
+      "title": "M4A Sample",
+      "artist": "filesamples.com",
+      "album": "Format Test"
+    },
+    {
+      "url": "https://filesamples.com/samples/audio/ogg/sample1.ogg",
+      "title": "OGG Vorbis Sample",
+      "artist": "filesamples.com",
+      "album": "Format Test"
+    },
+    {
+      "url": "https://filesamples.com/samples/audio/opus/sample1.opus",
+      "title": "Opus Sample",
+      "artist": "filesamples.com",
+      "album": "Format Test"
+    },
+    {
+      "url": "https://filesamples.com/samples/audio/wav/sample1.wav",
+      "title": "WAV Sample",
+      "artist": "filesamples.com",
+      "album": "Format Test"
+    },
+    {
+      "url": "https://archive.org/download/testmp3testfile/mpthreetest.mp3",
+      "title": "Internet Archive Test",
+      "artist": "Internet Archive",
+      "album": "Format Test"
+    }
+  ]
+}
