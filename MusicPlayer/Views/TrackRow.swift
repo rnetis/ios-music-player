@@ -20,11 +20,11 @@ struct TrackRow: View {
                 Text(track.title)
                     .font(.body.weight(player.currentTrack?.id == track.id ? .semibold : .medium))
                     .lineLimit(1)
-                    .foregroundColor(player.currentTrack?.id == track.id ? .purple : .primary)
+                    .foregroundColor(player.currentTrack?.id == track.id ? .purple : .white)
                 
                 Text(track.artist)
                     .font(.subheadline.weight(.regular))
-                    .foregroundColor(.secondary)
+                    .foregroundColor(.white.opacity(0.7))
                     .lineLimit(1)
                 
                 if player.currentTrack?.id == track.id && player.isPlaying {
@@ -67,7 +67,7 @@ struct TrackRow: View {
             RoundedRectangle(cornerRadius: 12)
                 .fill(
                     LinearGradient(
-                        colors: isHovering ? [Color.purple.opacity(0.08), Color.blue.opacity(0.05)] : [Color.clear, Color.clear],
+                        colors: isHovering ? [Color.purple.opacity(0.08), Color.blue.opacity(0.05)] : [Color.white.opacity(0.03), Color.white.opacity(0.03)],
                         startPoint: .leading,
                         endPoint: .trailing
                     )

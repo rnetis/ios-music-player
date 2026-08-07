@@ -31,11 +31,12 @@ struct ReposView: View {
                     Text("Point to any JSON file hosted anywhere (GitHub raw, gist, CDN…). It can be a bare array of tracks or an object with a \"tracks\" array. Add as many repos as you like.")
                         .font(.caption2)
                 }
+                .listRowBackground(Color.white.opacity(0.05))
 
                 Section("Repos (\(library.repoURLs.count))") {
                     if library.repoURLs.isEmpty {
                         Text("No repos yet. Add one above, or tap the sample button below.")
-                            .foregroundColor(.secondary)
+                            .foregroundColor(.white.opacity(0.7))
                     }
                     ForEach(library.statuses) { status in
                         HStack {
@@ -44,7 +45,7 @@ struct ReposView: View {
                                     .font(.body.weight(.medium))
                                 Text(status.url.absoluteString)
                                     .font(.caption)
-                                    .foregroundColor(.secondary)
+                                    .foregroundColor(.white.opacity(0.7))
                                     .lineLimit(1)
                             }
                             Spacer()
@@ -68,6 +69,7 @@ struct ReposView: View {
                         library.removeRepos(at: offsets)
                     }
                 }
+                .listRowBackground(Color.white.opacity(0.05))
 
                 Section {
                     Button {
@@ -84,6 +86,7 @@ struct ReposView: View {
                     }
                     .tint(.blue)
                 }
+                .listRowBackground(Color.white.opacity(0.05))
             }
             .navigationTitle("Music Repos")
             .navigationBarTitleDisplayMode(.inline)
@@ -97,9 +100,13 @@ struct ReposView: View {
             .hiddenScrollContentBackground()
             .background(
                 LinearGradient(
-                    colors: [Color(red: 0.98, green: 0.97, blue: 0.99), Color(red: 0.95, green: 0.94, blue: 0.97)],
-                    startPoint: .top,
-                    endPoint: .bottom
+                    colors: [
+                        Color(red: 0.15, green: 0.10, blue: 0.30),
+                        Color(red: 0.05, green: 0.02, blue: 0.10),
+                        Color.black
+                    ],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
                 )
             )
         }
