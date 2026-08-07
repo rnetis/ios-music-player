@@ -122,15 +122,21 @@ struct LibraryView: View {
                         TrackRow(track: track)
                     }
                     .buttonStyle(.plain)
+                    .listRowBackground(Color.clear)
+                    .listRowSeparator(.hidden)
                 }
             }
             .listStyle(.plain)
             .hiddenScrollContentBackground()
             .background(
                 LinearGradient(
-                    colors: [Color(red: 0.98, green: 0.97, blue: 0.99), Color(red: 0.95, green: 0.94, blue: 0.97)],
-                    startPoint: .top,
-                    endPoint: .bottom
+                    colors: [
+                        Color(red: 0.15, green: 0.10, blue: 0.30),
+                        Color(red: 0.05, green: 0.02, blue: 0.10),
+                        Color.black
+                    ],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
                 )
             )
             
@@ -182,9 +188,9 @@ struct LibraryView: View {
             }
             Text("No music yet")
                 .font(.title2.bold())
-                .foregroundColor(.primary)
+                .foregroundColor(.white)
             Text("Add a hosted JSON repo to load your music.")
-                .foregroundColor(.secondary)
+                .foregroundColor(.white.opacity(0.7))
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 32)
             Button("Add Music Repo") { showRepos = true }
@@ -201,9 +207,13 @@ struct LibraryView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(
             LinearGradient(
-                colors: [Color(red: 0.98, green: 0.97, blue: 0.99), Color(red: 0.95, green: 0.94, blue: 0.97)],
-                startPoint: .top,
-                endPoint: .bottom
+                colors: [
+                    Color(red: 0.15, green: 0.10, blue: 0.30),
+                    Color(red: 0.05, green: 0.02, blue: 0.10),
+                    Color.black
+                ],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
             )
         )
     }
