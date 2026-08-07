@@ -53,6 +53,7 @@ struct LibraryView: View {
                             Label("Repos", systemImage: "externaldrive.badge.plus")
                                 .foregroundColor(.purple)
                         }
+                        .accessibilityLabel("Add or manage repos")
                     }
                     ToolbarItem(placement: .navigationBarTrailing) {
                         HStack(spacing: 16) {
@@ -79,6 +80,7 @@ struct LibraryView: View {
                                     .font(.title3)
                                     .foregroundColor(.purple)
                             }
+                            .accessibilityLabel("Sort options")
                             
                             // Refresh button
                             if library.isRefreshing {
@@ -90,6 +92,7 @@ struct LibraryView: View {
                                     Image(systemName: "arrow.clockwise")
                                         .foregroundColor(.purple)
                                 }
+                                .accessibilityLabel("Refresh library")
                             }
                         }
                     }
