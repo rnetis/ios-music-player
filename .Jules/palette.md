@@ -1,0 +1,3 @@
+## 2024-03-24 - VoiceOver Tags for Custom SwiftUI Buttons
+**Learning:** Custom UI components in SwiftUI, such as icon-only `Button` elements constructed with arbitrary `ZStack` and `Image(systemName:)` views, don't automatically receive meaningful VoiceOver labels. Screen readers may just announce them as "button" or attempt to read raw image asset names.
+**Action:** Always manually apply `.accessibilityLabel("Descriptive Action")` modifiers to `Button` elements (or their inner labels, depending on the view hierarchy) when they lack visible, semantic text labels. This is particularly crucial for custom media playback controls.
