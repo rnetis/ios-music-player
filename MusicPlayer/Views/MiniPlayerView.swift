@@ -65,6 +65,7 @@ struct MiniPlayerView: View {
                             .foregroundColor(.white.opacity(0.8))
                     }
                 }
+                .accessibilityLabel("Previous Track")
                 
                 // Modern play/pause button with glow
                 Button {
@@ -95,6 +96,7 @@ struct MiniPlayerView: View {
                             .shadow(color: .black.opacity(0.2), radius: 2, x: 0, y: 1)
                     }
                 }
+                .accessibilityLabel(player.isPlaying ? "Pause" : "Play")
                 .disabled(player.isLoading)
                 
                 // Next button
@@ -111,6 +113,7 @@ struct MiniPlayerView: View {
                             .foregroundColor(.white.opacity(0.8))
                     }
                 }
+                .accessibilityLabel("Next Track")
             }
             .padding(.horizontal, 20)
             .padding(.vertical, 14)

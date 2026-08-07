@@ -167,6 +167,7 @@ struct PlayerView: View {
                 }
                 .frame(width: 44, height: 44)
             }
+            .accessibilityLabel("Shuffle")
             .scaleEffect(player.shuffle ? 1.1 : 1.0)
             
             // Previous button with hover effect
@@ -184,6 +185,7 @@ struct PlayerView: View {
                         .shadow(color: .black.opacity(0.2), radius: 4, x: 0, y: 2)
                 }
             }
+            .accessibilityLabel("Previous Track")
             .scaleEffect(0.95)
             
             // Play/Pause button - enlarged and enhanced with pulsing glow
@@ -232,6 +234,7 @@ struct PlayerView: View {
                 .scaleEffect(player.isPlaying ? 1.0 : 0.98)
                 .animation(.spring(response: 0.2), value: player.isPlaying)
             }
+            .accessibilityLabel(player.isPlaying ? "Pause" : "Play")
             .disabled(player.isLoading)
             
             // Next button with hover effect
@@ -249,6 +252,7 @@ struct PlayerView: View {
                         .shadow(color: .black.opacity(0.2), radius: 4, x: 0, y: 2)
                 }
             }
+            .accessibilityLabel("Next Track")
             .scaleEffect(0.95)
             
             // Sleep Timer button
@@ -277,6 +281,7 @@ struct PlayerView: View {
                     }
                 )
             }
+            .accessibilityLabel("Sleep Timer")
             .scaleEffect(player.sleepTimerRemaining != nil ? 1.1 : 1.0)
             .animation(.spring(response: 0.3), value: player.sleepTimerRemaining)
             
@@ -299,6 +304,7 @@ struct PlayerView: View {
                 }
                 .frame(width: 44, height: 44)
             }
+            .accessibilityLabel("Repeat Mode")
             .scaleEffect(player.repeatMode != .off ? 1.1 : 1.0)
         }
     }
