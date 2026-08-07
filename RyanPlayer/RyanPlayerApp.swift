@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct MusicPlayerApp: App {
+struct RyanPlayerApp: App {
     @StateObject private var player = PlayerManager.shared
 
     var body: some Scene {

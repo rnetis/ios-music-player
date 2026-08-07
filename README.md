@@ -1,4 +1,4 @@
-# Music Player (iOS)
+# RyanPlayer (iOS)
 
 A sideloadable iOS music player that plays **every audio format** — Opus, FLAC, MP3, M4A/AAC, OGG, WAV, ALAC, WMA, AC3, DTS, … — from **multiple hosted JSON repos**: any JSON file hosted anywhere on the internet (GitHub raw, gist, any CDN) that lists tracks with their URL, title and artist.
 
@@ -67,8 +67,8 @@ Field notes:
 
 ```bash
 brew install xcodegen
-xcodegen generate          # creates MusicPlayer.xcodeproj
-open MusicPlayer.xcodeproj
+xcodegen generate          # creates RyanPlayer.xcodeproj
+open RyanPlayer.xcodeproj
 ```
 
 Select your signing team under **Signing & Capabilities**, then Run on a device or simulator. (The GitHub Action builds it unsigned for sideloading, so no paid account needed there.)
@@ -84,7 +84,7 @@ Select your signing team under **Signing & Capabilities**, then Run on a device 
    git push origin v1.0.0
    ```
 
-4. The **Build Unsigned IPA** workflow runs on the macOS runner: generates the project, builds with `CODE_SIGNING_ALLOWED=NO`, packages `Payload/MusicPlayer.app` into `MusicPlayer-unsigned.ipa`, and creates a GitHub Release with the IPA attached.
+4. The **Build Unsigned IPA** workflow runs on the macOS runner: generates the project, builds with `CODE_SIGNING_ALLOWED=NO`, packages `Payload/RyanPlayer.app` into `RyanPlayer-unsigned.ipa`, and creates a GitHub Release with the IPA attached.
 
 Manual builds: use **Actions → Build Unsigned IPA → Run workflow** (uploads the IPA as an artifact instead of a Release).
 
@@ -116,8 +116,8 @@ The app picks VLCKit when present and silently falls back to AVFoundation otherw
 
 ```
 project.yml                        # XcodeGen spec (single source of truth)
-MusicPlayer/
-  MusicPlayerApp.swift             # app entry
+RyanPlayer/
+  RyanPlayerApp.swift              # app entry
   Info.plist                       # background audio, ATS, orientations
   Models/Track.swift               # track model + JSON decoding
   Services/RepoService.swift       # repo list persistence + fetching/parsing
@@ -135,7 +135,7 @@ scripts/make_icon.py               # regenerates AppIcon.png (stdlib only)
 
 ## Notes
 
-- **Bundle ID** defaults to `com.example.musicplayer` — change it in `project.yml` if you plan to keep a stable identity across installs.
+- **Bundle ID** is `com.ipkiana.rayan` — change it in `project.yml` if you ever need a different identity.
 - **ATS**: `NSAllowsArbitraryLoads` is enabled because repos/music are often served over plain http. Tighten it in `Info.plist` if you only use https. `NSLocalNetworkUsageDescription` is set so LAN servers (e.g. `http://192.168.x.x/music.json`) trigger the proper iOS local-network permission prompt.
 - **VLCKit** is a large binary (~150 MB); the first build fetches it from `code.videolan.org` and takes a few minutes. It's pinned via SPM to the default branch `master` (VLCKit 4.0-dev, checksum-pinned binary) — no released 3.x tag ships a root `Package.swift`.
 - Deployment target is iOS 15.0+.

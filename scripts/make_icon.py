@@ -1,16 +1,16 @@
-"""Generates the 1024x1024 app icon (AppIcon.png) for the MusicPlayer asset catalog.
+"""Generates the 1024x1024 app icon (AppIcon.png) for the RyanPlayer asset catalog.
 
 Pure Python stdlib (zlib + struct) — no Pillow required.
 
 Usage:  python scripts/make_icon.py
-Output: MusicPlayer/Assets.xcassets/AppIcon.appiconset/AppIcon.png
+Output: RyanPlayer/Assets.xcassets/AppIcon.appiconset/AppIcon.png
 """
 
 import struct
 import zlib
 
 SIZE = 1024
-OUT = "MusicPlayer/Assets.xcassets/AppIcon.appiconset/AppIcon.png"
+OUT = "RyanPlayer/Assets.xcassets/AppIcon.appiconset/AppIcon.png"
 
 # Layout constants
 NOTE_CX, NOTE_CY = 512, 480

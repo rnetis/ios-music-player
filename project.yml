@@ -1,6 +1,6 @@
-name: MusicPlayer
+name: RyanPlayer
 options:
-  bundleIdPrefix: com.example
+  bundleIdPrefix: com.ipkiana
   deploymentTarget:
     iOS: "15.0"
   createIntermediateGroups: true
@@ -16,25 +16,25 @@ settings:
     TARGETED_DEVICE_FAMILY: "1"
     GENERATE_INFOPLIST_FILE: NO
     CURRENT_PROJECT_VERSION: "1"
-    MARKETING_VERSION: "1.0.4"
+    MARKETING_VERSION: "1.1.0"
 targets:
-  MusicPlayer:
+  RyanPlayer:
     type: application
     platform: iOS
     sources:
-      - path: MusicPlayer
+      - path: RyanPlayer
     dependencies:
       - package: VLCKit
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.example.musicplayer
-        INFOPLIST_FILE: MusicPlayer/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.ipkiana.rayan
+        INFOPLIST_FILE: RyanPlayer/Info.plist
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
 schemes:
-  MusicPlayer:
+  RyanPlayer:
     build:
       targets:
-        MusicPlayer: all
+        RyanPlayer: all
     run:
       config: Debug
     archive:

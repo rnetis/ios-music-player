@@ -30,7 +30,7 @@ jobs:
         run: xcodegen generate
 
       - name: Resolve Swift packages
-        run: xcodebuild -project MusicPlayer.xcodeproj -scheme MusicPlayer -resolvePackageDependencies
+        run: xcodebuild -project RyanPlayer.xcodeproj -scheme RyanPlayer -resolvePackageDependencies
 
       - name: Build unsigned app (device, arm64)
         run: |
@@ -39,8 +39,8 @@ jobs:
             VERSION="${GITHUB_REF_NAME#v}"
           fi
           xcodebuild \
-            -project MusicPlayer.xcodeproj \
-            -scheme MusicPlayer \
+            -project RyanPlayer.xcodeproj \
+            -scheme RyanPlayer \
             -configuration Release \
             -destination 'generic/platform=iOS' \
             -derivedDataPath build \
@@ -53,20 +53,20 @@ jobs:
       - name: Package unsigned IPA
         run: |
           mkdir -p Payload
-          cp -R "build/Build/Products/Release-iphoneos/MusicPlayer.app" Payload/
-          zip -r -y "MusicPlayer-unsigned.ipa" Payload
+          cp -R "build/Build/Products/Release-iphoneos/RyanPlayer.app" Payload/
+          zip -r -y "RyanPlayer-unsigned.ipa" Payload
 
       - name: Upload IPA artifact (manual runs)
         if: ${{ !startsWith(github.ref, 'refs/tags/') }}
         uses: actions/upload-artifact@v4
         with:
-          name: MusicPlayer-unsigned-ipa
-          path: MusicPlayer-unsigned.ipa
+          name: RyanPlayer-unsigned-ipa
+          path: RyanPlayer-unsigned.ipa
 
       - name: Create GitHub Release (tag pushes)
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
-          files: MusicPlayer-unsigned.ipa
-          name: Music Player ${{ github.ref_name }}
+          files: RyanPlayer-unsigned.ipa
+          name: RyanPlayer ${{ github.ref_name }}
           generate_release_notes: true
